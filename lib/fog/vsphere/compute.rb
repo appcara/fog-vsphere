@@ -270,12 +270,6 @@ module Fog
           obj.to_s.match(/\("([^"]+)"\)/)[1]
         end
 
-        # @note
-        #   - Provide an alternative for getting managed_obj_id as class method
-        def self.managed_obj_id(obj)
-          obj.to_s.match(/\("([^"]+)"\)/)[1]
-        end
-
         def is_uuid?(id)
           !(id =~ /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/).nil?
         end

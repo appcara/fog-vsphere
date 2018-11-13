@@ -30,7 +30,7 @@ module Fog
           # otherwise we use a much slower implementation
           unless path.nil? || path.empty?
             return get_raw_vmfolders(path, datacenter_name).map do |folder|
-              self.class.folder_attributes(folder, datacenter_name)
+              folder_attributes(folder, datacenter_name)
             end
           end
 

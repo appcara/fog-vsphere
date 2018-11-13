@@ -7,7 +7,7 @@ module Fog
           # Cycle through all types of folders.
           folder = get_raw_folder(path, datacenter_name, type)
           raise(Fog::Compute::Vsphere::NotFound) unless folder
-          self.class.folder_attributes(folder, datacenter_name)
+          folder_attributes(folder, datacenter_name)
         end
 
         protected
@@ -49,7 +49,7 @@ module Fog
           get_raw_folder(path, datacenter_name, 'vm')
         end
 
-        def self.folder_attributes(folder, datacenter_name)
+        def folder_attributes(folder, datacenter_name)
           {
             id: managed_obj_id(folder),
             name: folder.name,
