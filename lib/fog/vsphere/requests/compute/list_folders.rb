@@ -30,7 +30,7 @@ module Fog
           # otherwise we use a much slower implementation
           unless path.nil? || path.empty?
             return get_raw_vmfolders(path, datacenter_name).map do |folder|
-              folder_attributes(folder, datacenter_name)
+              self.class.folder_attributes(folder, datacenter_name)
             end
           end
 
@@ -51,7 +51,7 @@ module Fog
               datacenter: datacenter_name,
               parent: lookup_folder_name(folder_inventory, parent_id),
               path: path.join('/'),
-              type: folder_type(folder['childType']),
+              type: self.class.folder_type(folder['childType']),
               id: folder_id
             )
           end.compact

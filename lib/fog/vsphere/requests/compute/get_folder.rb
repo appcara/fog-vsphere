@@ -7,7 +7,7 @@ module Fog
           # Cycle through all types of folders.
           folder = get_raw_folder(path, datacenter_name, type)
           raise(Fog::Compute::Vsphere::NotFound) unless folder
-          folder_attributes(folder, datacenter_name)
+          self.class.folder_attributes(folder, datacenter_name)
         end
 
         protected
@@ -49,13 +49,13 @@ module Fog
           get_raw_folder(path, datacenter_name, 'vm')
         end
 
-        def folder_attributes(folder, datacenter_name)
+        def self.folder_attributes(folder, datacenter_name)
           {
             id: managed_obj_id(folder),
             name: folder.name,
             parent: folder.parent.name,
             datacenter: datacenter_name,
-            type: folder_type(folder.childType),
+            type: self.class.folder_type(folder.childType),
             path: folder_path(folder)
           }
         end
@@ -64,7 +64,7 @@ module Fog
           '/' + folder.path.map(&:last).join('/')
         end
 
-        def folder_type(types)
+        def self.folder_type(types)
           return :vm        if types.include?('VirtualMachine')
           return :network   if types.include?('Network')
           return :datastore if types.include?('Datastore')
