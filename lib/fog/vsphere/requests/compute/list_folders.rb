@@ -51,7 +51,7 @@ module Fog
               datacenter: datacenter_name,
               parent: lookup_folder_name(folder_inventory, parent_id),
               path: path.join('/'),
-              type: self.class.folder_type(folder['childType']),
+              type: folder_type(folder['childType']),
               id: folder_id
             )
           end.compact
